@@ -33,5 +33,6 @@ CREATE TABLE articulos (
     PRIMARY KEY (pk)
 );
 
+INSERT INTO administrador VALUES (3, 'administrador', 'maestro', 12345678, 'admin', '1234');
 
 COMMIT;
