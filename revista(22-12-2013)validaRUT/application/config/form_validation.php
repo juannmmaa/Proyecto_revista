@@ -39,9 +39,9 @@ $config=array
      =>array(
 
             array('field' => 'nombre',            'label' => 'Nombre',    
-           'rules' => 'required|is_string|trim|xss_clean'),
+           'rules' => 'required|alpha|trim|xss_clean'),
             array('field' => 'descripcion',            'label' => 'Descripcion',    
-           'rules' => 'required|is_string|trim|xss_clean'),
+           'rules' => 'required|alpha|trim|xss_clean'),
             
       ),
 );
