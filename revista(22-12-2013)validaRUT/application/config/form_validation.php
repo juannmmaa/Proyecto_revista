@@ -6,9 +6,9 @@ $config=array
      =>array(
 
             array('field' => 'nombres',            'label' => 'Nombres',    
-           'rules' => 'required|is_string|trim|xss_clean'),
+           'rules' => 'required|alpha|trim|xss_clean'),
             array('field' => 'apellidos',            'label' => 'Apellidos',    
-           'rules' => 'required|is_string|trim|xss_clean'),
+           'rules' => 'required|alpha|trim|xss_clean'),
             array('field' => 'rut',           'label' => 'Rut',   
            'rules' => 'required|is_string|trim|xss_clean'),
             array('field' => 'login',            'label' => 'Login',    
@@ -39,9 +39,9 @@ $config=array
      =>array(
 
             array('field' => 'nombre',            'label' => 'Nombre',    
-           'rules' => 'required|alpha|trim|xss_clean'),
+           'rules' => 'required|is_string|trim|xss_clean'),
             array('field' => 'descripcion',            'label' => 'Descripcion',    
-           'rules' => 'required|alpha|trim|xss_clean'),
+           'rules' => 'required|is_string|trim|xss_clean'),
             
       ),
 );
