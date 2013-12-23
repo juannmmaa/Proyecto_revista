@@ -10,8 +10,15 @@ class Index extends CI_Controller {
     
 	public function index()
 	{
-		//$this->load->view('welcome_message');
-        $this->layout->view('index');
+		$datos=$this->index_model->lista_articulo();
+		$this->layout->view('index',compact("datos"));
+
+	}
+
+	public function mostrar_noticia_completa($pk)
+	{
+		$datos=$this->index_model->noticiaPK($pk);
+		$this->layout->view("ver_noticia",compact("datos"));
 	}
     
 }

@@ -24,4 +24,8 @@
 -Validacion de los formularios de los campos requeridos (todos los formularios)
 (21-12-2013)
 -vista index con diseño, y funcionando boton LOGIN (misma funcionalidad que antes pero con diseño)
+(22-12-2013)
+-Validacion de rut hecho
+-Consulta para ver noticias en index
+-Diseños hechos (no implementados)
 
