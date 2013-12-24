@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="author" content="Juanma" />
-	<link rel="stylesheet" href="public/css/login.css" type="text/css" />
+	<link rel="stylesheet" href="public/css/contacto.css" type="text/css" />
 	<title>Revista Digital </title>
 </head>
 <body>
