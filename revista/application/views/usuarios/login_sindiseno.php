@@ -1,3 +1,4 @@
+
 <h1>Ingrese sus datos</h1>
 <?php 
 if ( $this->session->flashdata('ControllerMessage') != '' ) 

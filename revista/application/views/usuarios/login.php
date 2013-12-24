@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="author" content="Juanma" />
-	<link rel="stylesheet" href="public/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="public/css/login.css" type="text/css" />
 	
 	<title>Revista Digital </title>
 </head>
@@ -24,8 +24,7 @@
 		<div id='cssmenu'>
 		
 <ul>
-   <li class='active'><a href="<?php echo base_url()?>index/index"><span>Inicio</span></a></li>
-  <!-- <li class='active'><a href="<?php //echo base_url()?>usuarios/logout"><span>Inicio</span></a>-->
+   <li class='active'><a href="<?php echo base_url()?>index"><span>Inicio</span></a></li>
    <li class='has-sub'><a href='#'><span>Noticias</span></a>
       <ul>
          <li><a href='#'><span>universidad</span></a></li>
@@ -39,7 +38,7 @@
          <li class='last'><a href='#'><span>Location</span></a></li>
       </ul>
    </li>
-   <li class='last'><a href='#'><span>Contact</span></a></li>
+   <li class='last'><a href="<?php echo base_url()?>contacto"><span>Contact</span></a></li>
 </ul>
 </div>
 
@@ -62,9 +61,8 @@
 			echo form_open(null,$atributos);
 			?>
 			<?php echo validation_errors(); ?>
-		
+		    
 			
-		
 			<div class="clear"></div>
 			
 			<form action="#" method="POST" id="login-form">

@@ -23,8 +23,7 @@
 		<div id='cssmenu'>
 		
 <ul>
-   <li class='active'><a href="<?php echo base_url()?>index/index"><span>Inicio</span></a></li>
-   <!--<li class='active'><a href="<?php //echo base_url()?>usuarios/logout"><span>Inicio</span></a>-->
+   <li class='active'><a href="<?php echo base_url()?>index"><span>Inicio</span></a></li>
    <li class='has-sub'><a href='#'><span>Noticias</span></a>
       <ul>
          <li><a href='#'><span>universidad</span></a></li>
@@ -38,7 +37,7 @@
          <li class='last'><a href='#'><span>Location</span></a></li>
       </ul>
    </li>
-   <li class='last'><a href='#'><span>Contact</span></a></li>
+   <li class='last'><a href="<?php echo base_url()?>contacto"><span>Contact</span></a></li>
 </ul>
 </div>
 
