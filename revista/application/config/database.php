@@ -48,11 +48,13 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'postgres';
-$db['default']['password'] = '1369'; //pass de postgresql
+$db['default']['hostname'] = '146.83.181.4';
+$db['default']['port'] = '6432';
+$db['default']['username'] = 'grupo05';
+$db['default']['password'] = 'grupo05'; //pass de postgresql
+$db['default']['schema'] = 'grupo05';
 //$db['default']['database'] = 'codeigniter';
-$db['default']['database'] = 'revista';
+$db['default']['database'] = 'iswdb';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
