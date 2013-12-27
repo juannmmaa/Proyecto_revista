@@ -71,7 +71,7 @@
                     </p>
 
                     <input type="submit" value="Enviar" title="Enviar" />
-                    <a href="dashboard.html" class="button round blue image-right ic-right-arrow">Ingresar</a>
+                    <!--<a href="dashboard.html" class="button round blue image-right ic-right-arrow">Ingresar</a>-->
 
                 </fieldset>
 

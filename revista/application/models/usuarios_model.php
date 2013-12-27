@@ -44,7 +44,7 @@ class usuarios_model extends CI_Model
    public function lista_articulo()
    {
       $query=$this->db
-      ->select("pk,titulo, bajada, noticia, fecha, autor_fk, categoria_fk")
+      ->select("pk,titulo, bajada, noticia, fecha, autor_fk, imagen,categoria_fk")
       ->from("articulos")
       ->order_by("pk","desc")
       ->get();

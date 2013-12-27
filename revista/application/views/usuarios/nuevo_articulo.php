@@ -13,6 +13,18 @@
 	<br/>
 	Noticia: <input type="text" name="noticia" value="<?php echo set_value("noticia")?>" />
 	<br/>
+	Imagen: 
+	<?php 
+		$datos = array(
+						'name' =>'file',
+						'type' =>'file',
+						'id' => 'file'/*,
+						'maxlength' =>'100',*/
+
+			);
+		echo form_input($datos,'');	
+	?>
+	<br/>
 	Fecha: <input type="date" name="fecha" value="<?php echo set_value("fecha")?>" />
 	<br/>
 	Escritor: <input type="text" name="autor_fk" value="<?php echo set_value("autor_fk")?>" />

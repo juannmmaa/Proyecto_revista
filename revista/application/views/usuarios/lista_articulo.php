@@ -20,6 +20,7 @@
 		<th>Fecha</th>
 		<th>Autor_fk</th>
 		<th>Categoria_fk</th>
+		<th>Imagen</th>
 		<th>Acciones</th>
 	</tr>
 	<?php
@@ -34,6 +35,7 @@
 				<td> <?php echo $dato->fecha ?> </td>
 				<td> <?php echo $dato->autor_fk ?> </td>
 				<td> <?php echo $dato->categoria_fk ?> </td>
+				<td> <?php echo $dato->imagen ?> </td>
 				<td>
 					<a href="<?php echo base_url()?>usuarios/edit_articulo/<?php echo $dato->pk?>">Editar</a> || <a href="<?php echo base_url()?>usuarios/delete_articulo/<?php echo $dato->pk?>">Eliminar</a>
 				</td>

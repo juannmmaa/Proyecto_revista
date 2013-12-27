@@ -30,6 +30,7 @@ CREATE TABLE articulos (
     fecha timestamp NOT NULL DEFAULT NOW(),
     autor_fk int NOT NULL REFERENCES administrador(pk) ON UPDATE CASCADE ON DELETE CASCADE,
     categoria_fk int NOT NULL REFERENCES categorias(pk) ON UPDATE CASCADE ON DELETE CASCADE,
+	imagen text,
     PRIMARY KEY (pk)
 );
 INSERT INTO administrador VALUES (0, 'administrador', 'maestro', 12345678, 'admin', '1234');

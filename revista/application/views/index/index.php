@@ -18,9 +18,15 @@
                 <li class='active'><a href="<?php echo base_url() ?>index"><span>Inicio</span></a></li>
                 <li class='has-sub'><a href='#'><span>Noticias</span></a>
                     <ul>
-                        <li><a href='#'><span>universidad</span></a></li>
-                        <li><a href='#'><span>Internacional</span></a></li>
-                        <li class='last'><a href='#'><span>Tecnologia</span></a></li>
+                       
+                       <?php
+                       foreach ($categorias as $categoria) 
+                       {
+                        ?>
+                            <li><a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $categoria->pk ?> "><span><?php echo $categoria->nombre?> </span></a></li>
+                            <?php
+                       }
+                       ?>
                     </ul>
                 </li>
                 <li class='has-sub'><a href='#'><span>Company</span></a>
@@ -47,7 +53,21 @@
                 <div class="column">
 
                     <h3><?php echo $dato->titulo ?></h3>
-                    <img src="public/images/thumb.gif" alt="Thumb" />
+                    <?php echo $dato->fecha?>
+                    <?php 
+                    if($dato->imagen == null)// en caso de que el campo de la imagen venga vacio se pondra una imagen demo
+                    {
+                        ?>
+                        <img src="public/images/thumb.gif" width='250' height='250' alt="Thumb" />
+                        <?php
+                    }
+                    else //en caso contrario se carga la imagen correspondiente al articulo
+                    {
+                        ?>
+                        <img src="uploads/archivos/<?php echo $dato->imagen ?> "  width='250' height='250' alt="Thumb" />
+                        <?php
+                    }
+                    ?>
                     <p><?php echo $dato->bajada ?></p>
                     <p class="more"><a href="<?php echo base_url() ?>index/mostrar_noticia_completa/<?php echo $dato->pk ?> ">Ver mas</a></p>
                 </div>

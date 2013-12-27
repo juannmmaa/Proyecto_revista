@@ -28,4 +28,13 @@
 -Validacion de rut hecho
 -Consulta para ver noticias en index
 -Diseños hechos (no implementados)
-
+(23-12-2013)
+-Diseños implementados en index,login
+-css cargado para template1
+-conectado a base de datos del servidor
+(25-12-2013)
+-guardar articulos con fotos
+-mostrar noticias con fotos en index (problemas al mostrar la foto en la noticia completa)
+-consulta hecha para que al mostrar la noticia muestre nombre y apellido del autor junto con el nombre de la categoria
+-consulta para llemar a categorias creadas en la barra superior "noticias"
+-agrupa las noticias por categoria (problema al ver la noticia completa, no cambia la categoria, pero si de autor)
