@@ -91,9 +91,11 @@ class usuarios_model extends CI_Model
    }
    
     public function eliminar_persona($pk)
-    {
-        $this->db->delete('administrador', array('pk' => $pk));
-        return true; 
+    { 
+
+       $this->db->delete('administrador', array('pk' => $pk));
+       return true; 
+       
     }
     public function eliminar_categoria($pk)
     {
@@ -213,6 +215,30 @@ class usuarios_model extends CI_Model
             //echo $digito;
          }
       }
-      
-
+      public function cerrar_sesion()
+      {
+        $this->session->unset_userdata(array('login' => ''));
+        $this->session->sess_destroy("taller_ci");
+        //redirect(base_url().'index',  301);
+      }
+       public function existeAdmin($pk)
+      {
+        //echo $pk; //recibe correctamente el rut
+        $where=array("rut"=>$pk);
+        $query=$this->db
+        ->select("nombres")
+        ->from("administrador")
+        ->where($where)
+        ->get();
+        if($query !=null)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+        //return $query->row();
+      }
+     
     }

@@ -32,7 +32,7 @@ class Layout
 	 * Variables para mejorar el SEO del sitio
 	 * @var sting
 	 */	
-	public $title       = 'Title por defecto';	
+	public $title       = 'Revista Informatica';	
 	public $keywords    = 'palabras clave';	
 	public $descripcion = 'descripción seo por defecto';
 

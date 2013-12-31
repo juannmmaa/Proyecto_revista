@@ -38,3 +38,11 @@
 -consulta hecha para que al mostrar la noticia muestre nombre y apellido del autor junto con el nombre de la categoria
 -consulta para llemar a categorias creadas en la barra superior "noticias"
 -agrupa las noticias por categoria (problema al ver la noticia completa, no cambia la categoria, pero si de autor)
+(26-12-2013)
+-Solucionado el problema del nombre de la categoria en noticia completa
+-cerrada la sesion de usuario al momento de salir a cualquier parte desde el panel de administracion
+-implementacion de diseño en panel de administracion
+(27-12-2013)
+-Guardar claves encriptadas
+-Valida existencia de noticias antes de mostrar una "noticia completa"
+-Validacion de existencia de usuario al momento de crear 

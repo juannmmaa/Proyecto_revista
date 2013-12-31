@@ -14,8 +14,9 @@ class Usuarios extends CI_Controller {
 	{
 		if(!empty($this->session_id))
         {
+            $categorias = $this->index_model->lista_categorias();
              $nombre = $this->session_id;
-             $this->layout->view('saludo',compact("nombre"));   
+             $this->layout->view('saludo',compact("nombre","categorias"));   
               
 
         }else
@@ -29,7 +30,7 @@ class Usuarios extends CI_Controller {
     {
         if ( $this->input->post() )
         {
-            $datos=$this->usuarios_model->logueo($this->input->post("login",true),/*sha1*/($this->input->post("pass",true)));
+            $datos=$this->usuarios_model->logueo($this->input->post("login",true),sha1($this->input->post("pass",true))); //envia la contraseña encriptada 
            if($datos==1)
            {
                 $this->session->set_userdata("taller_ci");
@@ -41,7 +42,8 @@ class Usuarios extends CI_Controller {
 					           redirect(base_url().'usuarios/login',  301);
            }
         }
-        $this->layout->view("login");
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view("login",compact("categorias"));
     }
     public function logout()
     {
@@ -65,62 +67,74 @@ class Usuarios extends CI_Controller {
                                 'apellidos'=>$this->input->post("apellidos",true),
                                 'rut'=>$this->input->post("rut",true),
                                 'login'=>$this->input->post("login",true),
-                                'pass'=>$this->input->post("pass",true)
+                                'pass'=>sha1($this->input->post("pass",true)) //guarda contraseña encriptada en sha1
                         );
 
                     $rut=$this->input->post('rut');//esta tomando el valor del campo rut 
-                    
-                    $validar_si_tiene_k = $this->usuarios_model->validar_k($rut);
-                    if($validar_si_tiene_k == true)
+                    $existe = $this->usuarios_model->existeAdmin($rut);//valida si es que el usuario existe o no
+                    if($existe == false) //si el usuario no existe realiza los procedimientos para guardar los datos del usuario ingresado
                     {
+                        $validar_si_tiene_k = $this->usuarios_model->validar_k($rut);
+                        if($validar_si_tiene_k == true)
+                        {
                         
-                        $rut = trim($rut, 'k'); //saco la k del rut con lo cual me queda sin digito verificador
-                        $calcular_digito = $this->usuarios_model->calculo_digito($rut); 
-                        //echo $calcular_digito; //comprueba que el calulo del digito es correcto
-                        if($calcular_digito == 10)
-                        {
-                            $guardar = $this->usuarios_model->agregar($data);
-                            if($guardar)
+                            $rut = trim($rut, 'k'); //saco la k del rut con lo cual me queda sin digito verificador
+                            $calcular_digito = $this->usuarios_model->calculo_digito($rut); 
+                            //echo $calcular_digito; //comprueba que el calulo del digito es correcto
+                            if($calcular_digito == 10)
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
-                                redirect(base_url().'usuarios/listar',301);
+                                $guardar = $this->usuarios_model->agregar($data);
+                                if($guardar)
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
+                                    redirect(base_url().'usuarios/listar',301);
+                                }
+                                else
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
+                                    redirect(base_url().'usuarios/usuario',301);
+                                }
                             }
                             else
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
-                                redirect(base_url().'usuarios/usuario',301);
+                                echo ("el rut ingresado posiblemente es invalido intente nuevamente");
                             }
                         }
-                         else
+                        else
                         {
-                            echo ("el rut ingresado posiblemente es invalido intente nuevamente");
-                        }
-                    }
-                    else
-                    {
-                        $validar=$this->usuarios_model->valida_rut($rut); //envia correctamente 
-                        if($validar ==true)
-                        {
-                            $guardar = $this->usuarios_model->agregar($data);
-                            if($guardar)
+                            $validar=$this->usuarios_model->valida_rut($rut); //envia correctamente 
+                            if($validar ==true)
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
-                                redirect(base_url().'usuarios/listar',301);
+                                $guardar = $this->usuarios_model->agregar($data);
+                                if($guardar)
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
+                                    redirect(base_url().'usuarios/listar',301);
+                                }
+                                else
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
+                                    redirect(base_url().'usuarios/usuario',301);
+                                }
                             }
                             else
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
-                                redirect(base_url().'usuarios/usuario',301);
+                                echo ("el rut ingresado posiblemente es invalido intente nuevamente");
                             }
-                        }
-                         else
-                        {
-                            echo ("el rut ingresado posiblemente es invalido intente nuevamente");
-                        }
                     
-                    }                  
+                        }                  
+                    }
+                    else //en caso de que el rut exista retorna un mensaje y redirecciona a la lista de administradores
+                    {
+                           $this->session->set_flashdata('ControllerMessage', 'El RUT que ingreso ya existe en nuestros registros');
+                            redirect(base_url().'usuarios/listar',301);
+                    }
+                    
+
                 }
+                  
             }
+        
             
             $this->layout->view("crear_usuario");
         }
@@ -253,68 +267,70 @@ class Usuarios extends CI_Controller {
                                 'apellidos'=>$this->input->post("apellidos",true),
                                 'rut'=>$this->input->post("rut",true),
                                 'login'=>$this->input->post("login",true),
-                                'pass'=>$this->input->post("pass",true)
+                                'pass'=>sha1($this->input->post("pass",true))
                         );
 
                     $rut=$this->input->post('rut');//esta tomando el valor del campo rut 
-                    
-                    $validar_si_tiene_k = $this->usuarios_model->validar_k($rut);
-                    if($validar_si_tiene_k == true)
-                    {
-                        $rut = trim($rut, 'k'); //saco la k del rut con lo cual me queda sin digito verificador
-                        $calcular_digito = $this->usuarios_model->calculo_digito($rut); 
-                        //echo $calcular_digito; //comprueba que el calulo del digito es correcto
-                        if($calcular_digito == 10)
+                    $existe = $this->usuarios_model->existeAdmin($rut);//valida si es que el usuario existe o no
+                   
+                        $validar_si_tiene_k = $this->usuarios_model->validar_k($rut);
+                        if($validar_si_tiene_k == true)
                         {
-                            $guardar = $this->usuarios_model->agregar($data);
-                            if($guardar)
+                            $rut = trim($rut, 'k'); //saco la k del rut con lo cual me queda sin digito verificador
+                            $calcular_digito = $this->usuarios_model->calculo_digito($rut); 
+                            //echo $calcular_digito; //comprueba que el calulo del digito es correcto
+                            if($calcular_digito == 10)
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
-                                redirect(base_url().'usuarios/listar',301);
+                                $guardar = $this->usuarios_model->agregar($data);
+                                if($guardar)
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
+                                    redirect(base_url().'usuarios/listar',301);
+                                }
+                                else
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
+                                    redirect(base_url().'usuarios/usuario',301);
+                                }
                             }
                             else
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
-                                redirect(base_url().'usuarios/usuario',301);
+                                echo ("el rut ingresado posiblemente es invalido intente nuevamente");
                             }
                         }
-                         else
+                        else
                         {
-                            echo ("el rut ingresado posiblemente es invalido intente nuevamente");
-                        }
-                    }
-                    else
-                    {
-                        $validar=$this->usuarios_model->valida_rut($rut); //envia correctamente 
-                        if($validar ==true)
-                        {
-                            $guardar = $this->usuarios_model->agregar($data);
-                            if($guardar)
+                            $validar=$this->usuarios_model->valida_rut($rut); //envia correctamente 
+                            if($validar ==true)
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
-                                redirect(base_url().'usuarios/listar',301);
+                                $guardar = $this->usuarios_model->agregar($data);
+                                if($guardar)
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
+                                 redirect(base_url().'usuarios/listar',301);
+                                }
+                                else
+                                {
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
+                                    redirect(base_url().'usuarios/usuario',301);
+                                }
                             }
                             else
                             {
-                                $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
-                                redirect(base_url().'usuarios/usuario',301);
+                                echo ("el rut ingresado posiblemente es invalido intente nuevamente");
                             }
-                        }
-                         else
-                        {
-                            echo ("el rut ingresado posiblemente es invalido intente nuevamente");
-                        }
                     
-                    }            
+                         }
+                              
                 }
                 
                     
             }
-       $datos=$this->usuarios_model->getPersonaPorPk($pk);
-        if(sizeof($datos)==0)
-        {
-            show_404();
-        }
+            $datos=$this->usuarios_model->getPersonaPorPk($pk);
+            if(sizeof($datos)==0)
+            {
+                show_404();
+            }
         $this->layout->view("editar_usuario",compact("pk","datos"));
     }
      public function delete_usuario($pk=null)
@@ -323,6 +339,7 @@ class Usuarios extends CI_Controller {
         {
             show_404();
         }
+      
         $guardar=$this->usuarios_model->eliminar_persona($pk);
         if($guardar)
         {
@@ -333,6 +350,7 @@ class Usuarios extends CI_Controller {
             $this->session->set_flashdata("ControllerMessage","Se ha producido un error. Inténtelo nuevamente por favor.");
             redirect(base_url()."usuarios/listar",310);
         }
+      
     }
     public function delete_categoria($pk=null)
     {

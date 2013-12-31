@@ -1,4 +1,6 @@
 
+	
+
 	<div id="wrap">
 		<div id="logo">
 			<h1>Revista Digital UTEM</h1>
@@ -36,6 +38,7 @@
    </li>
    <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contact</span></a></li>
 </ul>
+
 </div>
 
 
@@ -51,15 +54,29 @@
 	<br/>
 
 	<?php
-	if($datos->imagen !=null)
+	
+	if($datos->imagen !=null)//si es que le articulo contiene imagen, que la muestre
 	{
 	?>
 		<center>
 		<img src="uploads/archivos/<?php echo $datos->imagen ?> "  width='600' height='320' alt="Thumb"  />
+		
+		<!--<?php //echo $datos->imagen; ?> //prueba para ver si es que trae correctamente el nombre de la imagen, lo cual lo hace -->
+
 		</center>
 		<br/>
 		<?php
 	}
+	else
+	{
+		?>
+		<center>
+		<?php echo ("Este articulo no posee imagen"); ?>
+
+		</center>
+		<?php
+	}
+	
 	?>
 
 	<h2 align="center"> <font color=black size="4"><?php echo $datos->bajada?> </font></h2>
@@ -70,12 +87,9 @@
 	<br/>
 	autor: <?php echo $escritor->nombres. " ".$escritor->apellidos?> <!--llama al escritor por nombre y apellido -->
 	<br/>
-	categoria_fk: <?php echo $datos->categoria_fk?> <!--muestra correctamente el pk de la categoria a la que pertenece-->
-	categoria: <a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $categoria->pk ?> "><?php echo $categoria->nombre?></a> <!--llama a la categoria por nombre-->
-	<!--existe un error al mostrar el nombre de la categoria pese a que recibe de forma correcta la pk-->
-
-
-
+	
+	categoria: <a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $nom_categoria->pk ?> "><?php echo $nom_categoria->nombre?></a> <!--llama a la categoria por nombre-->
+	
 
 </p>
 		

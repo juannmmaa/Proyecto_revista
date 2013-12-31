@@ -18,9 +18,14 @@
                 <li class='active'><a href="<?php echo base_url() ?>index"><span>Inicio</span></a></li>
                 <li class='has-sub'><a href='#'><span>Noticias</span></a>
                     <ul>
-                        <li><a href='#'><span>universidad</span></a></li>
-                        <li><a href='#'><span>Internacional</span></a></li>
-                        <li class='last'><a href='#'><span>Tecnologia</span></a></li>
+                        <?php
+                       foreach ($categorias as $categoria) 
+                       {
+                        ?>
+                            <li><a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $categoria->pk ?> "><span><?php echo $categoria->nombre?> </span></a></li>
+                            <?php
+                       }
+                       ?>
                     </ul>
                 </li>
                 <li class='has-sub'><a href='#'><span>Company</span></a>

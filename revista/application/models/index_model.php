@@ -65,7 +65,16 @@ class index_model extends CI_Model
       ->where($where)
       ->get();
       return $query->result();
-
+   }
+   public function existeNoticia($pk)
+   {
+        $where=array("pk"=>$pk);
+        $query=$this->db
+        ->select("pk")
+        ->from("articulos")
+        ->where($where)
+        ->get();
+        return $query->row();
    }
 
 }

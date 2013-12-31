@@ -10,7 +10,8 @@ class Contacto extends CI_Controller {
     
 	public function index()
 	{
-        $this->layout->view('formulario_contacto');
+        $cerrar = $this->usuarios_model->cerrar_sesion();
+        $this->layout->view('formulario_contacto',"cerrar");
 	}
     
     public function enviar()
