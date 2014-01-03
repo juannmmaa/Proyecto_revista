@@ -7,14 +7,29 @@ class index_model extends CI_Model
     {
         parent::__construct();
     }
-    public function lista_articulo()
+    public function lista_articulo($pagina,$porpagina,$quehago)
    {
-      $query=$this->db
-      ->select("pk,titulo, bajada,imagen,fecha,categoria_fk")
-      ->from("articulos")
-      ->order_by("pk","desc")
-      ->get();
-      return $query->result();
+     
+       switch($quehago)
+        {
+            case 'limit':
+                $query=$this->db
+                ->select("pk,titulo,bajada,noticia,fecha,autor_fk,categoria_fk,imagen")
+                ->from("articulos")
+                //->order_by("pk","desc")
+                ->limit($porpagina,$pagina)
+                ->get();
+                return $query->result();
+            break;
+            case 'cuantos':
+                 $query=$this->db
+                ->select("pk,titulo,bajada,noticia,fecha,autor_fk,categoria_fk,imagen")
+                ->from("articulos")
+                //->order_by("pk","desc")
+                ->count_all_results();
+                return $query;
+            break;
+        }
    }
     public function lista_categorias()
    {
@@ -76,5 +91,6 @@ class index_model extends CI_Model
         ->get();
         return $query->row();
    }
-
+   
+   
 }

@@ -27,7 +27,7 @@
 				<td> <?php echo $dato->nombre ?> </td>
 				<td> <?php echo $dato->descripcion ?> </td>
 				<td>
-					<a href="<?php echo base_url()?>usuarios/edit_categoria/<?php echo $dato->pk?> ">Editar</a>|| <a href="<?php echo base_url()?>usuarios/delete_categoria/<?php echo $dato->pk?>">Eliminar</a>
+					<a href="<?php echo base_url()?>usuarios/validar_editar_cat/<?php echo $dato->pk?> ">Editar</a>|| <a href="<?php echo base_url()?>usuarios/validar_delete_cat/<?php echo $dato->pk?>">Eliminar</a>
 				</td>
 			</tr>
 			<?php

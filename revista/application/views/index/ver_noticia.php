@@ -59,7 +59,7 @@
 	{
 	?>
 		<center>
-		<img src="uploads/archivos/<?php echo $datos->imagen ?> "  width='600' height='320' alt="Thumb"  />
+		<img src="<?php echo base_url() ?>/uploads/archivos/<?php echo $datos->imagen ?> "  width='600' height='320' alt="Thumb"  />
 		
 		<!--<?php //echo $datos->imagen; ?> //prueba para ver si es que trae correctamente el nombre de la imagen, lo cual lo hace -->
 

@@ -72,7 +72,13 @@ class Usuarios extends CI_Controller {
 
                     $rut=$this->input->post('rut');//esta tomando el valor del campo rut 
                     $existe = $this->usuarios_model->existeAdmin($rut);//valida si es que el usuario existe o no
-                    if($existe == false) //si el usuario no existe realiza los procedimientos para guardar los datos del usuario ingresado
+
+                    if($existe != null)
+                    {
+                        $this->session->set_flashdata('ControllerMessage', 'El RUT que ingreso ya existe en nuestros registros');
+                        redirect(base_url().'usuarios/listar',301);
+                    }
+                    if($existe == null) //si el usuario no existe realiza los procedimientos para guardar los datos del usuario ingresado
                     {
                         $validar_si_tiene_k = $this->usuarios_model->validar_k($rut);
                         if($validar_si_tiene_k == true)
@@ -124,11 +130,7 @@ class Usuarios extends CI_Controller {
                     
                         }                  
                     }
-                    else //en caso de que el rut exista retorna un mensaje y redirecciona a la lista de administradores
-                    {
-                           $this->session->set_flashdata('ControllerMessage', 'El RUT que ingreso ya existe en nuestros registros');
-                            redirect(base_url().'usuarios/listar',301);
-                    }
+                    
                     
 
                 }
@@ -167,7 +169,7 @@ class Usuarios extends CI_Controller {
                 $error=NULL;
                                //valido la foto
                  $config['upload_path'] = './uploads/archivos/';
-                 $config['allowed_types'] = 'jpg|jpeg';
+                 $config['allowed_types'] = 'jpg|jpeg|png';
                  $config['max_size'] = '51200'; 
                  $config["overwrite"]=false;
                  $config['encrypt_name'] = true; 
@@ -182,17 +184,18 @@ class Usuarios extends CI_Controller {
                  {
                     $ima = $this->upload->data();
                     $file_name = $ima['file_name'];
-                }
+                 }
                      if(!$error==null)
                      {
-                        //echo $error["error"];
-                        echo ("la foto no se cargo, puede que el archivo no corresponda a jpg o jpeg");
-                        //echo $this->session->flashdata('ControllerMessage');
-                     }else
+                        //es requisito subir una foto de lo contrario nos arrojara algun error
+                        echo ("la foto no se cargo, puede que el archivo no corresponda a jpg o jpeg o png");
+                        
+                     }
+                     else
                      {
-                        //echo "file :".$file_name;
+                        echo "file :".$file_name;
                           $data = array
-                    (
+                            (
                             'titulo'=>$this->input->post("titulo",true),
                             'bajada'=>$this->input->post("bajada",true),
                             'noticia'=>$this->input->post("noticia",true),
@@ -200,19 +203,19 @@ class Usuarios extends CI_Controller {
                             'autor_fk'=>$this->input->post("autor_fk",true),
                             'categoria_fk'=>$this->input->post("categoria_fk",true),
                             'imagen' => $file_name
-                    );
-                   $guardar = $this->usuarios_model->agregar_articulo($data);
-                   if($guardar)
-                   {
-                        $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el articulo exitosamente');
-                        redirect(base_url().'usuarios/listar_articulo',301);
-                   }
-                   else
-                  {
-                        $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
-                        redirect(base_url().'usuarios/articulo_nuevo',301);
-                    }
-                }         
+                            );
+                            $guardar = $this->usuarios_model->agregar_articulo($data);
+                            if($guardar)
+                            {
+                                 $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el articulo exitosamente');
+                                 redirect(base_url().'usuarios/listar_articulo',301);
+                            }
+                            else
+                            {
+                                $this->session->set_flashdata('ControllerMessage', 'Se ha producido un error, intente nuevamente');
+                                redirect(base_url().'usuarios/articulo_nuevo',301);
+                            }
+                    }         
             }
         }
         
@@ -251,6 +254,7 @@ class Usuarios extends CI_Controller {
     }
     public function edit_usuario($pk=null)
     {
+       
         if(!$pk)
         {
             show_404();            
@@ -258,20 +262,20 @@ class Usuarios extends CI_Controller {
             if($this->input->post()) 
             {
                
-                if ($this->form_validation->run("usuarios/usuario"))
+                if ($this->form_validation->run("usuarios/usuario_editado"))
                 {
                    $data = array
                         (
 
                                 'nombres'=>$this->input->post("nombres",true),
                                 'apellidos'=>$this->input->post("apellidos",true),
-                                'rut'=>$this->input->post("rut",true),
-                                'login'=>$this->input->post("login",true),
-                                'pass'=>sha1($this->input->post("pass",true))
+                                'rut'=>$this->input->post("rut",true)
+                                //'login'=>$this->input->post("login",true),
+                                //'pass'=>sha1($this->input->post("pass",true))
                         );
 
                     $rut=$this->input->post('rut');//esta tomando el valor del campo rut 
-                    $existe = $this->usuarios_model->existeAdmin($rut);//valida si es que el usuario existe o no
+                    
                    
                         $validar_si_tiene_k = $this->usuarios_model->validar_k($rut);
                         if($validar_si_tiene_k == true)
@@ -281,10 +285,10 @@ class Usuarios extends CI_Controller {
                             //echo $calcular_digito; //comprueba que el calulo del digito es correcto
                             if($calcular_digito == 10)
                             {
-                                $guardar = $this->usuarios_model->agregar($data);
+                                $guardar = $this->usuarios_model->modificar_usuario($data,$pk);
                                 if($guardar)
                                 {
-                                    $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha editado el adminsitrador exitosamente');
                                     redirect(base_url().'usuarios/listar',301);
                                 }
                                 else
@@ -303,10 +307,10 @@ class Usuarios extends CI_Controller {
                             $validar=$this->usuarios_model->valida_rut($rut); //envia correctamente 
                             if($validar ==true)
                             {
-                                $guardar = $this->usuarios_model->agregar($data);
+                                $guardar = $this->usuarios_model->modificar_usuario($data);
                                 if($guardar)
                                 {
-                                    $this->session->set_flashdata('ControllerMessage', 'Se ha agregado el adminsitrador exitosamente');
+                                    $this->session->set_flashdata('ControllerMessage', 'Se ha editado el adminsitrador exitosamente');
                                  redirect(base_url().'usuarios/listar',301);
                                 }
                                 else
@@ -466,5 +470,121 @@ class Usuarios extends CI_Controller {
         $this->layout->view("editar_articulo",compact("pk","datos"));
     }
 
-   
+    public function validar_editar_usr($pk)
+    {
+        //echo $pk;//recibe pk
+        if ( $this->input->post() )
+        {
+            $datos=$this->usuarios_model->logueo($this->input->post("login",true),sha1($this->input->post("pass",true))); //envia la contraseña encriptada 
+           if($datos==1)
+           {
+                $this->session->set_userdata("taller_ci");
+                $this->session->set_userdata('login', $this->input->post('login',true));
+
+                redirect(base_url().'usuarios/edit_usuario/'.$pk,  301);
+           }else
+           {
+            $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
+                               redirect(base_url().'usuarios/validar',  301);
+           }
+        }
+        $this->layout->view("validar");
+    }
+    public function validar_delete_usr($pk)
+    {
+         if ( $this->input->post() )
+        {
+            $datos=$this->usuarios_model->logueo($this->input->post("login",true),sha1($this->input->post("pass",true))); //envia la contraseña encriptada 
+           if($datos==1)
+           {
+                $this->session->set_userdata("taller_ci");
+                $this->session->set_userdata('login', $this->input->post('login',true));
+
+                redirect(base_url().'usuarios/delete_usuario/'.$pk,  301);
+           }else
+           {
+            $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
+                               redirect(base_url().'usuarios/validar',  301);
+           }
+        }
+        $this->layout->view("validar");
+    }
+     public function validar_editar_cat($pk)
+    {
+        //echo $pk;//recibe pk
+        if ( $this->input->post() )
+        {
+            $datos=$this->usuarios_model->logueo($this->input->post("login",true),sha1($this->input->post("pass",true))); //envia la contraseña encriptada 
+           if($datos==1)
+           {
+                $this->session->set_userdata("taller_ci");
+                $this->session->set_userdata('login', $this->input->post('login',true));
+
+                redirect(base_url().'usuarios/edit_categoria/'.$pk,  301);
+           }else
+           {
+            $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
+                               redirect(base_url().'usuarios/validar',  301);
+           }
+        }
+        $this->layout->view("validar");
+    }
+    public function validar_delete_cat($pk)
+    {
+         if ( $this->input->post() )
+        {
+            $datos=$this->usuarios_model->logueo($this->input->post("login",true),sha1($this->input->post("pass",true))); //envia la contraseña encriptada 
+           if($datos==1)
+           {
+                $this->session->set_userdata("taller_ci");
+                $this->session->set_userdata('login', $this->input->post('login',true));
+
+                redirect(base_url().'usuarios/delete_categoria/'.$pk,  301);
+           }else
+           {
+            $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
+                               redirect(base_url().'usuarios/validar',  301);
+           }
+        }
+        $this->layout->view("validar");
+    }
+     public function validar_editar_art($pk)
+    {
+        //echo $pk;//recibe pk
+        if ( $this->input->post() )
+        {
+            $datos=$this->usuarios_model->logueo($this->input->post("login",true),sha1($this->input->post("pass",true))); //envia la contraseña encriptada 
+           if($datos==1)
+           {
+                $this->session->set_userdata("taller_ci");
+                $this->session->set_userdata('login', $this->input->post('login',true));
+
+                redirect(base_url().'usuarios/edit_articulo/'.$pk,  301);
+           }else
+           {
+            $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
+                               redirect(base_url().'usuarios/validar',  301);
+           }
+        }
+        $this->layout->view("validar");
+    }
+      public function validar_delete_art($pk)
+    {
+         if ( $this->input->post() )
+        {
+            $datos=$this->usuarios_model->logueo($this->input->post("login",true),sha1($this->input->post("pass",true))); //envia la contraseña encriptada 
+           if($datos==1)
+           {
+                $this->session->set_userdata("taller_ci");
+                $this->session->set_userdata('login', $this->input->post('login',true));
+
+                redirect(base_url().'usuarios/delete_articulo/'.$pk,  301);
+           }else
+           {
+            $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
+                               redirect(base_url().'usuarios/validar',  301);
+           }
+        }
+        $this->layout->view("validar");
+    }
 }

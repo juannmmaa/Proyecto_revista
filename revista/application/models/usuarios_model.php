@@ -109,9 +109,10 @@ class usuarios_model extends CI_Model
     }
    public function modificar_usuario($datos=array(),$pk)
     {
+        echo $pk;//prueba para ver si recibe correctamente la pk
         $this->db->where('pk', $pk);
         $this->db->update('administrador', $datos); 
-            return true;       
+        return true;       
     }
     public function modificar_categoria($datos=array(),$pk)
     {
@@ -226,19 +227,11 @@ class usuarios_model extends CI_Model
         //echo $pk; //recibe correctamente el rut
         $where=array("rut"=>$pk);
         $query=$this->db
-        ->select("nombres")
+        ->select("rut")
         ->from("administrador")
         ->where($where)
         ->get();
-        if($query !=null)
-        {
-          return true;
-        }
-        else
-        {
-          return false;
-        }
-        //return $query->row();
+        return $query->row();
       }
      
     }

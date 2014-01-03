@@ -10,11 +10,41 @@ class Index extends CI_Controller {
         $this->layout->setLayout('template1');
     }
 
-    public function index() {
-        $datos = $this->index_model->lista_articulo();
+    public function index() 
+    {   
+        //crear codigo de paginacion
+        if($this->uri->segment(3)) //corresponde al 3.. el primero es el controlador, el segundo el metodo y el tercero el numero de la pagina
+            {
+                $pagina=$this->uri->segment(3);
+            }
+        else
+        {
+            $pagina=0;
+        }
+        
+        $porpagina=9;
+        $datos = $this->index_model->lista_articulo($pagina,$porpagina,"limit");
+        //$datosNoticia=$this->index_model->getNoticiasPagination($pagina,$porpagina,"limit");
+        $cuantos=$this->index_model->lista_articulo($pagina,$porpagina,"cuantos");
+
+        $config['base_url'] = base_url().'index/index';
+        $config['total_rows'] = $cuantos;
+        $config['per_page'] = $porpagina;
+        $config['uri_segment'] = '3';
+        $config['num_links'] = '4';
+        $config['first_link'] = 'Primero';
+        $config['next_link'] = 'Siguiente';
+        $config['prev_link'] = 'Anterior';
+        $config['last_link'] = 'Ultimo';
+        $this->pagination->initialize($config);
+
+
+        
         $categorias = $this->index_model->lista_categorias();
         $cerrar = $this->usuarios_model->cerrar_sesion();
-        $this->layout->view('index', compact("datos","categorias","cerrar"));
+        $this->layout->view('index', compact("datos","categorias","cerrar","datosNoticia","cuantos"));
+
+
     }
 
     public function mostrar_noticia_completa($pk) 

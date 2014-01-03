@@ -37,7 +37,7 @@
 				<td> <?php echo $dato->categoria_fk ?> </td>
 				<td> <?php echo $dato->imagen ?> </td>
 				<td>
-					<a href="<?php echo base_url()?>usuarios/edit_articulo/<?php echo $dato->pk?>">Editar</a> || <a href="<?php echo base_url()?>usuarios/delete_articulo/<?php echo $dato->pk?>">Eliminar</a>
+					<a href="<?php echo base_url()?>usuarios/validar_editar_art/<?php echo $dato->pk?>">Editar</a> || <a href="<?php echo base_url()?>usuarios/validar_delete_art/<?php echo $dato->pk?>">Eliminar</a>
 				</td>
 			</tr>
 			<?php

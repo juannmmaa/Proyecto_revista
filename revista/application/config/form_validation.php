@@ -6,9 +6,9 @@ $config=array
      =>array(
 
             array('field' => 'nombres',            'label' => 'Nombres',    
-           'rules' => 'required|alpha|trim|xss_clean'),
+           'rules' => 'required|is_string|trim|xss_clean'),
             array('field' => 'apellidos',            'label' => 'Apellidos',    
-           'rules' => 'required|alpha|trim|xss_clean'),
+           'rules' => 'required|is_string|trim|xss_clean'),
             array('field' => 'rut',           'label' => 'Rut',   
            'rules' => 'required|is_string|trim|xss_clean'),
             array('field' => 'login',            'label' => 'Login',    
@@ -42,6 +42,17 @@ $config=array
            'rules' => 'required|is_string|trim|xss_clean'),
             array('field' => 'descripcion',            'label' => 'Descripcion',    
            'rules' => 'required|is_stringtrim|xss_clean'),
+            
+      ),
+      'usuarios/usuario_editado'
+     =>array(
+
+            array('field' => 'nombres',            'label' => 'Nombres',    
+           'rules' => 'required|is_string|trim|xss_clean'),
+            array('field' => 'apellidos',            'label' => 'Apellidos',    
+           'rules' => 'required|is_string|trim|xss_clean'),
+            array('field' => 'rut',           'label' => 'Rut',   
+           'rules' => 'required|is_string|trim|xss_clean'),
             
       ),
 );

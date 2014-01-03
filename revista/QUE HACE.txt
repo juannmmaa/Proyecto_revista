@@ -46,3 +46,12 @@
 -Guardar claves encriptadas
 -Valida existencia de noticias antes de mostrar una "noticia completa"
 -Validacion de existencia de usuario al momento de crear 
+(30-12-2013)
+-paginacion en als noticias (agrupadas de a 9)
+-(revisar formulario para ingresar articulo sin imagen)
+(01-01-2014)
+-implementacion de la validacion de usuario para editar o eliminar 
+(02-01-2014)
+-arreglado el problea de update del usuario
+-arreglado el problema de las fotos
+-implementada la validacion en todos los edit y todos los delete

@@ -12,13 +12,13 @@
                     if($dato->imagen == null)// en caso de que el campo de la imagen venga vacio se pondra una imagen demo
                     {
                         ?>
-                        <img src="public/images/thumb.gif" width='250' height='250' alt="Thumb" />
+                        <img src="<?php echo base_url() ?>/public/images/thumb.gif" width='250' height='250' alt="Thumb" />
                         <?php
                     }
                     else //en caso contrario se carga la imagen correspondiente al articulo
                     {
                         ?>
-                        <img src="uploads/archivos/<?php echo $dato->imagen ?> "  width='250' height='250' alt="Thumb" />
+                        <img src="<?php echo base_url() ?>/uploads/archivos/<?php echo $dato->imagen ?> "  width='250' height='250' alt="Thumb" />
                         <?php
                     }
                     ?>

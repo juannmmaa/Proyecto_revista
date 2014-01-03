@@ -29,7 +29,9 @@
 				<td> <?php echo $dato->apellidos ?> </td>
 				<td> <?php echo $dato->rut ?> </td>
 				<td>
-					<a href="<?php echo base_url()?>usuarios/edit_usuario/<?php echo $dato->pk?> ">Editar</a> || <a href="<?php echo base_url()?>usuarios/delete_usuario/<?php echo $dato->pk?>">Eliminar</a>
+					
+					 
+					<a href="<?php echo base_url()?>usuarios/validar_editar_usr/<?php echo $dato->pk?> ">Editar</a> || <a href="<?php echo base_url()?>usuarios/validar_delete_usr/<?php echo $dato->pk?>">Eliminar</a>
 				</td>
 			</tr>
 			<?php

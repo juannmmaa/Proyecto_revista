@@ -18,17 +18,18 @@ if ( $this->session->flashdata('ControllerMessage') != '' )
 	Nombres: <input type="text" name="nombres" value="<?php echo $datos->nombres?>" />
 	</p>
 	<p>
-	Correo: <input type="text" name="apellidos" value="<?php echo $datos->apellidos?>" />
+	Apellido: <input type="text" name="apellidos" value="<?php echo $datos->apellidos?>" />
 	</p>
 	<p>
 	RUT: <input type="text" name="rut" value="<?php echo $datos->rut?>" />
 	</p>
-	<p>
-	Usuario: <input type="text" name="login" value="<?php echo $datos->login?>" />
+	<!--<p>
+	Usuario: <input type="text" name="login" value="<?php //echo $datos->login?>" disabled=true/>
 	</p>
 	<p>
-	Password: <input type="text" name="pass" value="<?php echo $datos->pass?>" />
+	Password: <input type="password" name="pass" value="<?php //echo $datos->pass?>" disabled=true />
 	</p>
+	-->
 </p>
 
 <input type="hidden" name="pk" value="<?php echo $pk?>" />
