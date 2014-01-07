@@ -83,7 +83,7 @@ form label.alt-label { text-transform: none; }
 
 form input[type="text"], input[type="password"], textarea {
 	border: 1px solid #d9dbdd;
-	padding: 1em 0.625em; /* 16/16 10/16 */
+	padding: 1em 0.625em; /* 16/16 10/16 
 	outline: none;
 }
 	form input[type="text"]:hover, input[type="password"]:hover, textarea:hover,
@@ -97,6 +97,43 @@ form input[type="submit"] {
 	border: none;
 	cursor: pointer;
 	padding: 0.833em; /* 10/12 */
+	
+
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+	background-repeat: no-repeat;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+form input[type="button"] {
+	border: none;
+	cursor: pointer;
+	padding: 0.833em; /* 10/12 */
+	
+
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+	background-repeat: no-repeat;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+form input[type="reset"] {
+	border: none;
+	cursor: pointer;
+	padding: 0.833em; /* 10/12 */
+	
+
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+	background-repeat: no-repeat;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+form input[type="hidden"] {
+	border: none;
+	cursor: pointer;
+	padding: 0.833em; /* 10/12 */
+	
 
 	background-position: right center;
 	padding-right: 3em; /* 36/12 */
@@ -315,9 +352,9 @@ p  { margin: 0 0 15px; line-height: 1.64em; }
 
 #logo { float: left; margin: 35px 0 0 400px; height: 89px; }
 	#logo a:hover { border-bottom: 1px solid #222; }
-	#logo p { padding: 2px 0 0 4px; font-size: .9em; color: #555; }
-	#logo h1 { font-size: 2.6em; margin: 0; text-shadow: 1px 1px 1px #000; }
-		#logo h1 a { color: #fff; }
+	#logo p { padding: 2px 0 0 4px; font-size: 1.9em; color: #FFFFFF; }
+	#logo h1 { float: center; font-size: 4.0em; margin: 0; text-shadow: 1px 1px 1px #FFFFFF;  }
+		#logo h1 a { color: #FFFFFF; }
 
 	#explore { float: right; margin: 130px 5px 0 0; }
 		#explore-link { float: left; height: 25px; padding: 9px 0 0 20px; width: 106px; color: #808080; background: url(../images/explore.gif) no-repeat; }
@@ -336,9 +373,9 @@ p  { margin: 0 0 15px; line-height: 1.64em; }
 
 h3 { font-size: 1.3em; font: bold 1.3em Arial; color: #222; margin: 0 0 10px; }
 
-.column { float: left; width: 283px; margin: 0 40px 0 0; line-height: 2.2em; }
+.column { float: left; width: 250px; margin: 0 40px 0 0; line-height: 2.2em; }
 	.column.last { margin-right: 0; }
-	.column img { padding: 10px; border: 1px solid #ddd; margin: 0 0 5px; }
+	.column img { padding: 5px; border: 1px solid #ddd; margin: 0 0 5px; }
 	.more a { background: url(../images/bullet.gif) no-repeat 0 7px; padding: 0 0 0 8px; color: #672A6D; font-weight: bold; font-size: .9em; }
 	
 #footer { padding: 20px; color: #999; }

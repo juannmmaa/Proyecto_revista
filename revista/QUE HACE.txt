@@ -55,3 +55,6 @@
 -arreglado el problea de update del usuario
 -arreglado el problema de las fotos
 -implementada la validacion en todos los edit y todos los delete
+(04-01-2014)
+-Formulario de contacto hecho, enviando mail
+-implementacon diseño crear usuario y crear categoria

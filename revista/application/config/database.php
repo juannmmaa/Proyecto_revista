@@ -53,7 +53,6 @@ $db['default']['port'] = '6432';
 $db['default']['username'] = 'grupo05';
 $db['default']['password'] = 'grupo05'; //pass de postgresql
 $db['default']['schema'] = 'grupo05';
-//$db['default']['database'] = 'codeigniter';
 $db['default']['database'] = 'iswdb';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';

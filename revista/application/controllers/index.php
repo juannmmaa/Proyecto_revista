@@ -42,7 +42,7 @@ class Index extends CI_Controller {
         
         $categorias = $this->index_model->lista_categorias();
         $cerrar = $this->usuarios_model->cerrar_sesion();
-        $this->layout->view('index', compact("datos","categorias","cerrar","datosNoticia","cuantos"));
+        $this->layout->view('index', compact("datos","categorias","cerrar","cuantos"));
 
 
     }
@@ -60,17 +60,25 @@ class Index extends CI_Controller {
         }
         else
         {
-            $this->layout->view("noExiste");
+            $categorias = $this->index_model->lista_categorias();
+            $this->layout->view("noExiste",compact("categorias"));
         }
         
     }
     public function lista_por_categoria($pk)
     {
+       
 
+        $categorias = $this->index_model->lista_categorias();
         $datos = $this->index_model->lista_articuloPorCategoria($pk);
         $nom_categoria= $this->index_model->obtenerCategoria($pk);
         $cerrar = $this->usuarios_model->cerrar_sesion();//para cerrar la sesion de usuario al momento de salir del panel de administrador 
-        $this->layout->view("listaPorCategoria",compact("datos","nom_categoria","cerrar"));    
+        $this->layout->view("listaPorCategoria",compact("datos","nom_categoria","cerrar","categorias","datos_paginacion","cuantos_paginacion"));    
+    }
+    public function nosotros()
+    {
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view("nosotros",compact("categorias"));
     }
 
 

@@ -57,6 +57,7 @@ if (defined('ENVIRONMENT'))
  *
  */
 	$system_path = 'system';
+	//$system_path = '../system'; 
 
 /*
  *---------------------------------------------------------------
@@ -73,6 +74,7 @@ if (defined('ENVIRONMENT'))
  *
  */
 	$application_folder = 'application';
+	//$application_folder = '../application';
 
 /*
  * --------------------------------------------------------------------

@@ -137,25 +137,28 @@ class Usuarios extends CI_Controller {
                   
             }
         
-            
-            $this->layout->view("crear_usuario");
+            $categorias = $this->index_model->lista_categorias();
+            $this->layout->view("crear_usuario",compact("categorias"));
         }
     public function listar()
     {
+        $categorias = $this->index_model->lista_categorias();
         $datos=$this->usuarios_model->lista();
-        $this->layout->view('registros',compact("datos"));
+        $this->layout->view('registros',compact("datos","categorias"));
     }
     
     public function listar_articulo()
     {
+        $categorias = $this->index_model->lista_categorias();
         $datos=$this->usuarios_model->lista_articulo();
-        $this->layout->view('lista_articulo',compact("datos"));
+        $this->layout->view('lista_articulo',compact("datos","categorias"));
     }
 
     public function listar_categoria()
     {
+        $categorias = $this->index_model->lista_categorias();
         $datos=$this->usuarios_model->lista_categoria();
-        $this->layout->view('lista_categoria',compact("datos"));
+        $this->layout->view('lista_categoria',compact("datos","categorias"));
     }
 
     public function articulo_nuevo($pk=null)
@@ -218,8 +221,9 @@ class Usuarios extends CI_Controller {
                     }         
             }
         }
-        
-        $this->layout->view("nuevo_articulo");
+        $escritores = $this->usuarios_model->lista();
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view("nuevo_articulo",compact("categorias","escritores"));
     }
     public function nueva_categoria()
     {
@@ -248,8 +252,8 @@ class Usuarios extends CI_Controller {
             }
 
         }
-        
-        $this->layout->view("crear_categoria");
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view("crear_categoria",compact("categorias"));
         
     }
     public function edit_usuario($pk=null)
@@ -335,7 +339,9 @@ class Usuarios extends CI_Controller {
             {
                 show_404();
             }
-        $this->layout->view("editar_usuario",compact("pk","datos"));
+        $escritores = $this->usuarios_model->lista();
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view("editar_usuario",compact("pk","datos","categorias","escritores"));
     }
      public function delete_usuario($pk=null)
     {
@@ -426,8 +432,8 @@ class Usuarios extends CI_Controller {
         {
             show_404();
         }
-        
-        $this->layout->view("editar_categoria",compact("pk","datos"));
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view("editar_categoria",compact("pk","datos","categorias"));
     }
     public function edit_articulo($pk=null)
     {
@@ -467,7 +473,9 @@ class Usuarios extends CI_Controller {
         {
             show_404();
         }
-        $this->layout->view("editar_articulo",compact("pk","datos"));
+        $escritores = $this->usuarios_model->lista();
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view("editar_articulo",compact("pk","datos","escritores","categorias"));
     }
 
     public function validar_editar_usr($pk)
@@ -587,4 +595,26 @@ class Usuarios extends CI_Controller {
         }
         $this->layout->view("validar");
     }
+   /* public function enviar_correo()
+    {
+        if($this->input->post()) 
+        {
+             
+            $nombre=$this->input->post("nombre",true);
+            $email=$this->input->post("email",true);
+            $texto=$this->input->post("texto",true);
+                   
+            $enviar = $this->usuarios_model->mandar_correo($nombre,$email,$texto);
+            if($enviar==true)
+            {
+                echo "su mensaje ha sido recibido";
+            }
+            else
+            {
+                echo "su mensaje no ha sido recibido intente nuevamente";
+            }
+        }
+
+        $this->layout->view('formulario_contacto');
+    }*/
 }

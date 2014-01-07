@@ -1,6 +1,50 @@
- <h1> NOTICIAS DE LA CATEGORIA <?php echo $nom_categoria->nombre?></h1>
- <h2>DESCRIPCION: <?php echo $nom_categoria->descripcion ?></h2>
 
+<div>
+    <div id="wrap">
+        <div id="logo">
+            <h1>Revista Digital UTEM</h1>
+            <p>Proyecto Ingenieria de Software - Grupo 05</p>
+        </div>
+
+        <div id="explore">
+            <a href="<?php echo base_url() ?>usuarios/login" id="explore-link">Iniciar Sesion</a>
+        </div>
+
+
+        <div id="content-top"></div>
+
+        <div id='cssmenu'>
+
+            <ul>
+                <li class='active'><a href="<?php echo base_url() ?>index"><span>Inicio</span></a></li>
+                <li class='has-sub'><a href='#'><span>Noticias por categoria</span></a>
+                    <ul>
+                       
+                       <?php
+                       foreach ($categorias as $categoria) 
+                       {
+                        ?>
+                            <li><a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $categoria->pk ?> "><span><?php echo $categoria->nombre?> </span></a></li>
+                            <?php
+                       }
+                       ?>
+                    </ul>
+                </li>
+               
+                <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contacto</span></a></li>
+                
+            </ul>
+        </div>
+
+
+<div id="content-middle">
+  <center>
+  
+     
+    <p style="font-size: 250%;"> NOTICIAS DE LA CATEGORIA <?php echo $nom_categoria->nombre?></p>
+    <p style="font-size: 175%;">DESCRIPCION: <?php echo $nom_categoria->descripcion ?></P>
+  </center> 
+ <br/>
   <?php
             foreach ($datos as $dato) {
                 ?>
@@ -30,3 +74,22 @@
                 <?php
             }
             ?>
+                
+            <div class="clear"></div>
+        </div>
+		<div id="content-bottom"></div>
+        <p>
+            <center>
+                <?php echo $this->pagination->create_links()?>
+            </center>
+        </p>
+        
+
+        <div id="footer">
+            <p id="links">
+                <a href="<?php echo base_url() ?>index/nosotros">Nosotros</a>
+            </p>
+            <p> Grupo 05; Felipe Alvarez, Juan Cortez, Christopher Salvatierra</p>
+        </div>
+    </div>  
+</div>

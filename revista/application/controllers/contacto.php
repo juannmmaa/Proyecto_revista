@@ -11,20 +11,34 @@ class Contacto extends CI_Controller {
 	public function index()
 	{
         $cerrar = $this->usuarios_model->cerrar_sesion();
+        $categorias = $this->index_model->lista_categorias();
+        $this->layout->view('formulario_contacto',compact("cerrar","categorias"));
+
         
-        $this->layout->view('formulario_contacto',compact("cerrar"));
 	}
-    
-    public function enviar()
+       
+    /*public function enviar()
     {
-          $data = array
+      $this->load->model('contacto_model');
+         if($this->input->post()) 
+        {
+           $data = array
                         (
+
                                 'nombre'=>$this->input->post("nombre",true),
-                                'correo'=>$this->input->post("correo",true),
-                                'texto'=>$this->input->post("texto",true)
-                            
+                                'email'=>$this->input->post("email",true),
+                                'mensaje'=>$this->input->post("mensaje",true)
+                                 
                         );
-         //$enviar= $this->contacto_model->enviar_correo($data);
-         $this->layout->view('formulario_contacto',compact("data"));
+            $nombre = $this->input->post("nombre",true);
+            $email = $this->input->post("email",true);
+            $mensaje = $this->input->post("mensaje",true);
+            
+           // $enviar = $this->contacto_model->enviar_mail($nombre,$email,$mensaje);
+
+        }
+
     }
+    */
 }
+

@@ -1,4 +1,38 @@
-<h1>Registro de Administradores</h1>
+
+	<div id="wrap">
+		<div id="logo">
+			<h1>Revista Digital UTEM</h1>
+			<p>Proyecto Ingenieria de Software - Grupo 05</p>
+		</div>
+		
+		
+		<div id="content-top"></div>
+		
+		<div id='cssmenu'>
+		
+<ul>
+   <li class='active'><a href="<?php echo base_url() ?>index"><span>Inicio</span></a></li>
+   <li class='has-sub'><a href='#'><span>Noticias por categoria</span></a>
+      <ul>
+                       
+                       <?php
+                       foreach ($categorias as $categoria) 
+                       {
+                        ?>
+                            <li><a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $categoria->pk ?> "><span><?php echo $categoria->nombre?> </span></a></li>
+                            <?php
+                       }
+                       ?>
+                    </ul>
+   </li>
+   <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contacto</span></a></li>
+</ul>
+</div>
+<br/>
+<br/>
+<center>
+<p style="font-size: 250%;"> Registro de Administradores</p>
+</center>
 
 <p>
 	<a href ="<?php echo base_url()?>usuarios/usuario" > Crear un nuevo administrador </a>
@@ -12,6 +46,7 @@
 		}
 ?>
 <table>
+	
 	<tr style ="background-color:#000000; color:#ffffff">
 		<th>PK</th>
 		<th>Nombres</th>
@@ -40,4 +75,4 @@
 
 </table>
 
-<input type="button" name="Atras" value="Atrás" onClick="location.href='usuarios/saludo'" />
+<input type="button" name="Atras" value="Atrás" onClick="location.href='<?php echo base_url() ?>usuarios'" />

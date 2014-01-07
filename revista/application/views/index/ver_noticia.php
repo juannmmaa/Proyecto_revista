@@ -30,13 +30,8 @@
                        ?>
       </ul>
    </li>
-   <li class='has-sub'><a href='#'><span>Company</span></a>
-      <ul>
-         <li><a href='#'><span>About</span></a></li>
-         <li class='last'><a href='#'><span>Location</span></a></li>
-      </ul>
-   </li>
-   <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contact</span></a></li>
+   
+   <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contacto</span></a></li>
 </ul>
 
 </div>
@@ -96,9 +91,9 @@
 		<div id="content-bottom"></div>
 	
 		<div id="footer">
-			<p id="links">
-				<a href="#">Nosotros</a>
-			</p>
-			<p>Copyright &copy; Grupo 05; Felipe Alvarez, Juan Cortez, Christopher Salvatierra</p>
-		</div>
+            <p id="links">
+                <a href="<?php echo base_url() ?>index/nosotros">Nosotros</a>
+            </p>
+            <p> Grupo 05; Felipe Alvarez, Juan Cortez, Christopher Salvatierra</p>
+        </div>
 	</div>	

@@ -1,5 +1,38 @@
-<h1>Registro de Articulos</h1>
 
+	<div id="wrap">
+		<div id="logo">
+			<h1>Revista Digital UTEM</h1>
+			<p>Proyecto Ingenieria de Software - Grupo 05</p>
+		</div>
+		
+		
+		<div id="content-top"></div>
+		
+		<div id='cssmenu'>
+		
+<ul>
+   <li class='active'><a href="<?php echo base_url() ?>index"><span>Inicio</span></a></li>
+   <li class='has-sub'><a href='#'><span>Noticias por categoria</span></a>
+      <ul>
+                       
+                       <?php
+                       foreach ($categorias as $categoria) 
+                       {
+                        ?>
+                            <li><a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $categoria->pk ?> "><span><?php echo $categoria->nombre?> </span></a></li>
+                            <?php
+                       }
+                       ?>
+                    </ul>
+   </li>
+   <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contacto</span></a></li>
+</ul>
+</div>
+<br/>
+<br/>
+<center>
+<p style="font-size: 250%;"> Registro de Articulos</p>
+</center>
 <p>
 	<a href ="<?php echo base_url()?>usuarios/articulo_nuevo" > Crear un nuevo articulo </a>
 
@@ -11,8 +44,9 @@
 <?php		
 		}
 ?>
-<table>
-	<tr style ="background-color:#000000; color:#ffffff">
+<table >
+	
+	<tr style ="background-color:#000000; color:#ffffff ">
 		<th>PK</th>
 		<th>Titulo</th>
 		<th>Bajada</th>
@@ -28,7 +62,12 @@
 		{
 			?>
 			<tr style ="background-color:#f0f0f0;">
-				<td> <?php echo $dato->pk ?> </td>
+				<td> 
+					<?php echo $dato->pk ?> 
+					<br/>
+					<a href="<?php echo base_url() ?>index/mostrar_noticia_completa/<?php echo $dato->pk ?> ">Ver</a>
+				</td>
+
 				<td> <?php echo $dato->titulo ?> </td>
 				<td> <?php echo $dato->bajada ?> </td>
 				<td> <?php echo $dato->noticia ?> </td>
@@ -46,4 +85,4 @@
 
 </table>
 
-<input type="button" name="Atras" value="Atrás" onClick="location.href='usuarios/saludo'" />
+<input type="button" name="Atras" value="Atrás" onClick="location.href='<?php echo base_url() ?>usuarios'" />

@@ -1,16 +1,18 @@
 <?php
 
-class index_model extends CI_Model 
+class contacto_model extends CI_Model 
 {
 
     function __construct()
     {
         parent::__construct();
     }
-    public function enviar_mail($data=array())
+    public function enviar_mail($nombre,$email,$mensaje)
     {
-      echo $data->nombre;
-    }
+    	echo $nombre;
+    	echo $email;
+    	echo $mensaje;
+     }
    
    
 }

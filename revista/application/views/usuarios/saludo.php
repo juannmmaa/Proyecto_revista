@@ -11,7 +11,7 @@ bienvenid@ <?php echo $nombre ?>
 <a href="<?php echo base_url() ?>usuarios/logout">Cerrar Sesión</a>
 <ul>
    <li class='active'><a href="<?php echo base_url() ?>index"><span>Inicio</span></a></li>
-   <li class='has-sub'><a href='#'><span>Noticias</span></a>
+   <li class='has-sub'><a href='#'><span>Noticias por categoria</span></a>
       <ul>
         <!-- <li><a href='#'><span>universidad</span></a></li>
          <li><a href='#'><span>Internacional</span></a></li>
@@ -27,13 +27,8 @@ bienvenid@ <?php echo $nombre ?>
                        ?>
       </ul>
    </li>
-   <li class='has-sub'><a href='#'><span>Company</span></a>
-      <ul>
-         <li><a href='#'><span>About</span></a></li>
-         <li class='last'><a href='#'><span>Location</span></a></li>
-      </ul>
-   </li>
-   <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contact</span></a></li>
+   
+   <li class='last'><a href="<?php echo base_url() ?>contacto"><span>Contacto</span></a></li>
 </ul>
 </div>
     
@@ -44,7 +39,7 @@ bienvenid@ <?php echo $nombre ?>
     
         
             <font size="3">
-                <a href="<?php echo base_url() ?>usuarios/articulo_nuevo" class="button round blue image-center">Subir Articulo</a>        
+                <a href="<?php echo base_url() ?>usuarios/articulo_nuevo/" class="button round blue image-center">Subir Articulo</a>        
                 &nbsp
                 &nbsp
                 <a href="<?php echo base_url() ?>usuarios/listar_articulo" class="button round blue image-center">Lista de Noticias</a>
