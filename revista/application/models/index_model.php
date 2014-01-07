@@ -1,5 +1,5 @@
 <?php
-
+//modelo para realizar las consultas del controlador Index
 class index_model extends CI_Model 
 {
 
@@ -7,7 +7,7 @@ class index_model extends CI_Model
     {
         parent::__construct();
     }
-    public function lista_articulo($pagina,$porpagina,$quehago)
+    public function lista_articulo($pagina,$porpagina,$quehago) 
    {
      
        switch($quehago)

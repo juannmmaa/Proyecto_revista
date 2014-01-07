@@ -25,7 +25,7 @@
                     <ul>
                        
                        <?php
-                       foreach ($categorias as $categoria) 
+                       foreach ($categorias as $categoria) //aca muestra todas las categorias que existan en la base de datos, ocurre lo mismo en todas las vistas que lo requieren
                        {
                         ?>
                             <li><a href="<?php echo base_url() ?>index/lista_por_categoria/<?php echo $categoria->pk ?> "><span><?php echo $categoria->nombre?> </span></a></li>

@@ -48,13 +48,13 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '146.83.181.4';
-$db['default']['port'] = '6432';
-$db['default']['username'] = 'grupo05';
+$db['default']['hostname'] = '146.83.181.4'; //nombre del servidor al cual accedemos
+$db['default']['port'] = '6432'; //puerto de coneccion
+$db['default']['username'] = 'grupo05'; //usuario de postgresl
 $db['default']['password'] = 'grupo05'; //pass de postgresql
 $db['default']['schema'] = 'grupo05';
-$db['default']['database'] = 'iswdb';
-$db['default']['dbdriver'] = 'postgre';
+$db['default']['database'] = 'iswdb';//nombre de la base de datos con la cual trabajaremos
+$db['default']['dbdriver'] = 'postgre'; //motor de base de dato
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

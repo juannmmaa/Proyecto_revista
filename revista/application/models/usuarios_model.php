@@ -1,5 +1,5 @@
 <?php
-
+//modelo para hacer las consultas del controlador USUARIOS y la validacion de rut
 class usuarios_model extends CI_Model 
 {
 

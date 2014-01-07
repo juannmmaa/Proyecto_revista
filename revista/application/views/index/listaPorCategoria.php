@@ -46,7 +46,7 @@
   </center> 
  <br/>
   <?php
-            foreach ($datos as $dato) {
+            foreach ($datos as $dato) { //recibe las noticias de la categoria y las muestra
                 ?>
 
                 <div class="column">

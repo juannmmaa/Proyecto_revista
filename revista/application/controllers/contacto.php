@@ -7,38 +7,20 @@ class Contacto extends CI_Controller {
         parent::__construct();
         $this->layout->setLayout('template1');
     }
+
+    /*
+    este controlador es el encargado de realizar las acciones para la vista de contacto
+    */
     
 	public function index()
 	{
-        $cerrar = $this->usuarios_model->cerrar_sesion();
-        $categorias = $this->index_model->lista_categorias();
-        $this->layout->view('formulario_contacto',compact("cerrar","categorias"));
+        $cerrar = $this->usuarios_model->cerrar_sesion();//en caso de que este abierta una sesion de usuario esta es cerrada 
+        $categorias = $this->index_model->lista_categorias(); //lista las categorias para enviarlas a la vista
+        $this->layout->view('formulario_contacto',compact("cerrar","categorias"));//ambas variables se envian a la vista para que sean utilizadas
 
         
 	}
        
-    /*public function enviar()
-    {
-      $this->load->model('contacto_model');
-         if($this->input->post()) 
-        {
-           $data = array
-                        (
-
-                                'nombre'=>$this->input->post("nombre",true),
-                                'email'=>$this->input->post("email",true),
-                                'mensaje'=>$this->input->post("mensaje",true)
-                                 
-                        );
-            $nombre = $this->input->post("nombre",true);
-            $email = $this->input->post("email",true);
-            $mensaje = $this->input->post("mensaje",true);
-            
-           // $enviar = $this->contacto_model->enviar_mail($nombre,$email,$mensaje);
-
-        }
-
-    }
-    */
+    
 }
 

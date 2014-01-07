@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+//controlador USUARIO
 class Usuarios extends CI_Controller {
 
 	private $session_id;
@@ -12,21 +12,22 @@ class Usuarios extends CI_Controller {
     
 	public function index()
 	{
+        //si se quiere acceder al controlador valida si es que se esta logeado o no
 		if(!empty($this->session_id))
         {
             $categorias = $this->index_model->lista_categorias();
              $nombre = $this->session_id;
-             $this->layout->view('saludo',compact("nombre","categorias"));   
+             $this->layout->view('saludo',compact("nombre","categorias")); //en caso de que la sesion este iniciada se va al panel de admnistracion
               
 
         }else
         {
-            redirect(base_url().'usuarios/login',  301);
+            redirect(base_url().'usuarios/login',  301); //en caso contrario pide loguearse
         }
         
 	}
  
-    public function login()
+    public function login()//funcion para logearse
     {
         if ( $this->input->post() )
         {
@@ -45,14 +46,14 @@ class Usuarios extends CI_Controller {
         $categorias = $this->index_model->lista_categorias();
         $this->layout->view("login",compact("categorias"));
     }
-    public function logout()
+    public function logout()//cierra sesion de usuario
     {
             $this->session->unset_userdata(array('login' => ''));
             $this->session->sess_destroy("taller_ci");
             redirect(base_url().'index',  301);
     }
   
-     public function usuario()
+     public function usuario() //crea un usuario nuevo con los datos recibidos desde el formulario
     {
            
             if($this->input->post())
@@ -60,7 +61,7 @@ class Usuarios extends CI_Controller {
                if ($this->form_validation->run("usuarios/usuario"))
                 {
 
-                    $data = array
+                    $data = array //recibe los datos desde el formulario
                         (
 
                                 'nombres'=>$this->input->post("nombres",true),
@@ -108,7 +109,7 @@ class Usuarios extends CI_Controller {
                         }
                         else
                         {
-                            $validar=$this->usuarios_model->valida_rut($rut); //envia correctamente 
+                            $validar=$this->usuarios_model->valida_rut($rut); 
                             if($validar ==true)
                             {
                                 $guardar = $this->usuarios_model->agregar($data);
@@ -138,30 +139,30 @@ class Usuarios extends CI_Controller {
             }
         
             $categorias = $this->index_model->lista_categorias();
-            $this->layout->view("crear_usuario",compact("categorias"));
+            $this->layout->view("crear_usuario",compact("categorias")); //muestra la vista para crear el usuario
         }
-    public function listar()
+    public function listar()//metodo para listar a todos los usuarios
     {
         $categorias = $this->index_model->lista_categorias();
         $datos=$this->usuarios_model->lista();
         $this->layout->view('registros',compact("datos","categorias"));
     }
     
-    public function listar_articulo()
+    public function listar_articulo() //metodo para listar los articulos
     {
         $categorias = $this->index_model->lista_categorias();
         $datos=$this->usuarios_model->lista_articulo();
         $this->layout->view('lista_articulo',compact("datos","categorias"));
     }
 
-    public function listar_categoria()
+    public function listar_categoria()//metodo para listar las categorias
     {
         $categorias = $this->index_model->lista_categorias();
         $datos=$this->usuarios_model->lista_categoria();
         $this->layout->view('lista_categoria',compact("datos","categorias"));
     }
 
-    public function articulo_nuevo($pk=null)
+    public function articulo_nuevo($pk=null) //crear articulo al igual que el usuario
     {
         if($this->input->post()) 
         {
@@ -225,7 +226,7 @@ class Usuarios extends CI_Controller {
         $categorias = $this->index_model->lista_categorias();
         $this->layout->view("nuevo_articulo",compact("categorias","escritores"));
     }
-    public function nueva_categoria()
+    public function nueva_categoria() //para crear una nueva categoria
     {
         
         if($this->input->post())
@@ -256,7 +257,7 @@ class Usuarios extends CI_Controller {
         $this->layout->view("crear_categoria",compact("categorias"));
         
     }
-    public function edit_usuario($pk=null)
+    public function edit_usuario($pk=null)//edita el usuario, trabaja de forma similar al crear solo que realiza un par de acciones para traer los datos antes ingresados
     {
        
         if(!$pk)
@@ -325,6 +326,7 @@ class Usuarios extends CI_Controller {
                             }
                             else
                             {
+
                                 echo ("el rut ingresado posiblemente es invalido intente nuevamente");
                             }
                     
@@ -343,7 +345,7 @@ class Usuarios extends CI_Controller {
         $categorias = $this->index_model->lista_categorias();
         $this->layout->view("editar_usuario",compact("pk","datos","categorias","escritores"));
     }
-     public function delete_usuario($pk=null)
+     public function delete_usuario($pk=null) //para borrar un usuario teniendo su primary key
     {
         if(!$pk)
         {
@@ -478,7 +480,7 @@ class Usuarios extends CI_Controller {
         $this->layout->view("editar_articulo",compact("pk","datos","escritores","categorias"));
     }
 
-    public function validar_editar_usr($pk)
+    public function validar_editar_usr($pk) //para validar al momento de editar y que si es correcto redireccion al metodo que corresponde
     {
         //echo $pk;//recibe pk
         if ( $this->input->post() )
@@ -493,7 +495,7 @@ class Usuarios extends CI_Controller {
            }else
            {
             $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
-                               redirect(base_url().'usuarios/validar',  301);
+                               redirect(base_url().'usuarios/validar_editar_usr/'.$pk,  301);
            }
         }
         $this->layout->view("validar");
@@ -512,7 +514,7 @@ class Usuarios extends CI_Controller {
            }else
            {
             $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
-                               redirect(base_url().'usuarios/validar',  301);
+                               redirect(base_url().'usuarios/validar_delete_usr/'.$pk,  301);
            }
         }
         $this->layout->view("validar");
@@ -532,7 +534,7 @@ class Usuarios extends CI_Controller {
            }else
            {
             $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
-                               redirect(base_url().'usuarios/validar',  301);
+                               redirect(base_url().'usuarios/validar_editar_cat/'.$pk,  301);
            }
         }
         $this->layout->view("validar");
@@ -551,7 +553,7 @@ class Usuarios extends CI_Controller {
            }else
            {
             $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
-                               redirect(base_url().'usuarios/validar',  301);
+                               redirect(base_url().'usuarios/validar_delete_cat/'.$pk,  301);
            }
         }
         $this->layout->view("validar");
@@ -570,8 +572,10 @@ class Usuarios extends CI_Controller {
                 redirect(base_url().'usuarios/edit_articulo/'.$pk,  301);
            }else
            {
+            
             $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
-                               redirect(base_url().'usuarios/validar',  301);
+                               redirect(base_url().'usuarios/validar_editar_art/'.$pk,  301);
+
            }
         }
         $this->layout->view("validar");
@@ -590,31 +594,10 @@ class Usuarios extends CI_Controller {
            }else
            {
             $this->session->set_flashdata('ControllerMessage', 'Usuario y/o clave inválida.');
-                               redirect(base_url().'usuarios/validar',  301);
+                               redirect(base_url().'usuarios/validar_delete_art/'.$pk,  301);
            }
         }
         $this->layout->view("validar");
     }
-   /* public function enviar_correo()
-    {
-        if($this->input->post()) 
-        {
-             
-            $nombre=$this->input->post("nombre",true);
-            $email=$this->input->post("email",true);
-            $texto=$this->input->post("texto",true);
-                   
-            $enviar = $this->usuarios_model->mandar_correo($nombre,$email,$texto);
-            if($enviar==true)
-            {
-                echo "su mensaje ha sido recibido";
-            }
-            else
-            {
-                echo "su mensaje no ha sido recibido intente nuevamente";
-            }
-        }
-
-        $this->layout->view('formulario_contacto');
-    }*/
+   
 }
