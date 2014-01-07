@@ -233,5 +233,18 @@ class usuarios_model extends CI_Model
         ->get();
         return $query->row();
       }
+
+     /* public function getEscritor($pk)
+    {
+      echo $pk;//recibe el login del admin
+      $where=array("login"=>$pk);
+        $query=$this->db
+         ->select("pk")
+        ->from("administrador")
+        ->where($where)
+        ->get();
+        return $query->row();
+
+    }*/
      
     }
